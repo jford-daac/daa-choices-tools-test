@@ -265,7 +265,7 @@ WebChoices consumer opt-out tool.
 | Referer | http://\<dev \| staging \| qa \| integrate \| www \| optout\>.aboutads.info/\* |
 | Accept | text/html,application/xhtml+xml |
 
-*<u>Sample Requests URLs:</u>*
+*<u>Sample Request URL:</u>*
 
 `http://your.domain/with/path/to/endpoint`
 `?action_id=3`
@@ -399,7 +399,7 @@ Example for company using non-cookie technology:
 `http://www.aboutads.info/token/123/1-1/csrftoken`
 
 Example for company using only cookie technology:
-`http://www.aboutads.info/token/123/1**-0**/csrftoken`
+`http://www.aboutads.info/token/123/1-0/csrftoken`
 
 ### C. Opt Out
 
@@ -441,7 +441,7 @@ optout&gt;.aboutads.info/*</td>
 </tbody>
 </table>
 
-*<u>Sample Requests URL:</u>*
+*<u>Sample Request URL:</u>*
 
 `http://your.domain/endpoint`
 `?action_id=4&participant_id=10`
@@ -635,7 +635,7 @@ Headers
 | Referer | http://\<dev \| staging \| qa \| integrate \| www \| optout\>.aboutads.info/\* |
 | Accept | text/html,application/xhtml+xml |
 
-*<u>Sample Requests URLs:</u>*
+*<u>Sample Request URL:</u>*
 
 `http://your.domain/endpoint?action_id=5&nocache=223442`
 
