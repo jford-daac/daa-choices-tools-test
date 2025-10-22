@@ -22,7 +22,7 @@ subdomains - <u>optout.aboutads.info and dev.aboutads.info for testing
 purposes</u>.
 
 Links to access the WebChoices Tool should point to
- <u>optout.aboutads.info</u>.
+ <u>[optout.aboutads.info](https://optout.aboutads.info]</u>.
 
 <sup>1</sup> Cookie-less technologies in this WebChoices document do
 NOT include IDFA, AAID, hashed emails and phone numbers. DAA offers
@@ -61,16 +61,16 @@ domain.
 
 This integration guide contains five sections:
 
-1.  **CONSUMER OPT-OUT EXPERIENCE**
+1.  **[CONSUMER OPT-OUT EXPERIENCE](#consumer-opt-out-experience)**
 - An overview of the new opt-out platform additions
 
-2.  **WEBCHOICES DEVELOPMENT AND PRODUCTION SITES**
-- Company information management.
+2.  **[WEBCHOICES DEVELOPMENT AND PRODUCTION SITES](#webchoices-development-and-production-sites)**
+- Company information management
 
 3.  **[ONBOARDING PROCESS](#onboarding-process)**
-- Instructions for activating your organization to the new opt-out tool.
+- Instructions for activating your organization to the new opt-out tool
 
-4.  **[CONSUMER OPT-OUT INTEGRATION SPECIFICATION](#_TOC_250001)**
+4.  **[CONSUMER OPT-OUT INTEGRATION SPECIFICATION](#consumer-opt-out-integration-specification)**
 - New browser status reporting
 - General Requirements
 - Status and Token
@@ -78,13 +78,13 @@ This integration guide contains five sections:
 
 5.  **[ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP](#establishing-a-first-party-trust-relationship)**
 - How to set an opt-out cookie in the “From Visited” scenario when
-browsers block third-party cookies with the new opt-out tool.
+browsers block third-party cookies with the new opt-out tool
 - Request
 - Response
-- Guidelines For using a Trust Cookie (session cookie)
+- Guidelines for using a Trust Cookie (session cookie)
 - Guidelines for response
 
-# CONSUMER OPT-OUT EXPERIENCE
+## CONSUMER OPT-OUT EXPERIENCE
 
 The purpose of the WebChoices opt-out tool is to provide consumers with a destination to:
 
@@ -99,7 +99,7 @@ The purpose of the WebChoices opt-out tool is to provide consumers with a destin
     data for Interest-Based Advertising from one, several, or all of the
     companies listed on the WebChoices tool.
 
-# WEBCHOICES DEVELOPMENT AND PRODUCTION SITES
+## WEBCHOICES DEVELOPMENT AND PRODUCTION SITES
 
 This section provides instructions on how a company can access the
 WebChoices development site to test integrations before deploying them
@@ -118,7 +118,7 @@ to consumers.
     where companies’ opt-out functionality can be tested without being
     released to the public.
 
-# ONBOARDING PROCESS
+## ONBOARDING PROCESS
 
 This section provides information on how companies can onboard their
 organization’s information and endpoints to the WebChoices opt-out
@@ -173,24 +173,22 @@ platform.
     production environment and your endpoint will be available to
     consumers.
 
-<span id="_TOC_250001" class="anchor"></span>
-
-# CONSUMER OPT-OUT INTEGRATION SPECIFICATION
+## CONSUMER OPT-OUT INTEGRATION SPECIFICATION
 
 This section describes what is required to implement a WebChoices
 Opt-Out Service Endpoint capable of integrating with the cookie-based
 WebChoices consumer opt-out tool.
 
-## General Requirements
+### General Requirements
 
-### Browser Compatibility
+#### Browser Compatibility
 
 1)  No technologies shall be utilized in your implementation of an
     endpoint that will render it unable to function reliably and quickly
     on all major browser and operating system combinations on desktop
     and mobile devices which support third-party cookies.
 
-### Opt-Out Cookies
+#### Opt-Out Cookies
 
 1)  Companies shall use generic values for their company's opt-out
     cookie value.
@@ -235,7 +233,7 @@ WebChoices consumer opt-out tool.
     the presence of an opt-out cookie being set, regardless of
     non-cookie technology used.
 
-### Use of Optional Anti-CSRF Tokens
+#### Use of Optional Anti-CSRF Tokens
 
 1)  Companies are allowed (but not required) to exchange anti-CSRF
     tokens in advance of setting an opt-out cookie as part of this
@@ -252,7 +250,7 @@ WebChoices consumer opt-out tool.
     to the requestor and at no point shall it return rendered content or
     xml that is visible within a consumer's browser window.
 
-### Opt Out Failures
+#### Opt Out Failures
 
 1)  As is the case with the current choice page, all failures/errors
     must return a result back for processing, regardless of reason. Any
@@ -262,7 +260,7 @@ WebChoices consumer opt-out tool.
     raised by DAA. Failure to address issue within a reasonable may
     result in, at the discretion of DAA, delisting a company.
 
-### Recommendations
+#### Recommendations
 
 1)  Use some variation of ‘opt-out’ as the name of your company's
     opt-out cookie. This helps consumers identify which cookies are
@@ -275,7 +273,7 @@ WebChoices consumer opt-out tool.
     with critical quality assurance processes when onboarding new
     companies or when releasing new features to the opt-out tool.
 
-### Performance
+#### Performance
 
 1)  Maintaining fast endpoints is becoming increasingly important with
     the implementation of additional technologies. There will be
@@ -626,7 +624,7 @@ Reserved for future use</p></td>
 <u>Example:</u>
 http://www.aboutads.info**/token/**123/1-1/magic_string
 
-# ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP
+## ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP
 
 This is a new feature available for all companies, regardless if they
 utilize cookies exclusively or also use non-cookie technologies for
@@ -661,7 +659,7 @@ your systems from setting any additional cookies (such as frequency
 capping, ad delivery & reporting) once an opt-out is set on browsers
 where an enhanced trust relationship exists.
 
-## Request
+### Request
 
 Headers
 
@@ -681,13 +679,13 @@ URL Parameters
 | action_id | string | value “5” indicates establish temporary trust by setting a session cookie. |
 | nocache | string | Ignore: cache buster |
 
-## Response
+### Response
 
 1.  All cookies shall be set using HTTP headers. There is no redirect
     required as part of this request. **The use of JavaScript in this
     step is prohibited.**
 
-## Guidelines For using a Trust Cookie (session cookie)
+### Guidelines For using a Trust Cookie (session cookie)
 
 1.  The cookie for this step shall be a **session cookie with no
     expiration set.**
@@ -699,7 +697,7 @@ URL Parameters
     practice for this step shall be to use cookie name=“FPtrust” and
     cookie value=“1”
 
-## Guidelines for response
+### Guidelines for response
 
 1.  A company’s response shall be a single HTTP 200 response.
 
