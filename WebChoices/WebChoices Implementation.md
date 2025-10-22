@@ -54,22 +54,22 @@ domain.
 
 This integration guide contains five sections:
 
-1.  **[CONSUMER OPT-OUT EXPERIENCE](#consumer-opt-out-experience)**
-An overview of the new opt-out platform additions
+I.  **[CONSUMER OPT-OUT EXPERIENCE](#consumer-opt-out-experience)**
+- An overview of the new opt-out platform additions
 
-2.  **[WEBCHOICES DEVELOPMENT AND PRODUCTION SITES](#webchoices-development-and-production-sites)**
-Company information management
+II.  **[WEBCHOICES DEVELOPMENT AND PRODUCTION SITES](#webchoices-development-and-production-sites)**
+- Company information management
 
-3.  **[ONBOARDING PROCESS](#onboarding-process)**
-Instructions for activating your organization to the new opt-out tool
+III.  **[ONBOARDING PROCESS](#onboarding-process)**
+- Instructions for activating your organization to the new opt-out tool
 
-4.  **[CONSUMER OPT-OUT INTEGRATION SPECIFICATION](#consumer-opt-out-integration-specification)**
+IV.  **[CONSUMER OPT-OUT INTEGRATION SPECIFICATION](#consumer-opt-out-integration-specification)**
 - New browser status reporting
 - General Requirements
 - Status and Token
 - Opt Out
 
-5.  **[ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP](#establishing-a-first-party-trust-relationship)**
+V.  **[ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP](#establishing-a-first-party-trust-relationship)**
 - How to set an opt-out cookie in the “From Visited” scenario when
 browsers block third-party cookies with the new opt-out tool
 - Request
@@ -98,11 +98,11 @@ This section provides instructions on how a company can access the
 WebChoices development site to test integrations before deploying them
 to consumers.
 
-1.  **Access**. WebChoices is accessible at the following URLs:
+**Access**. WebChoices is accessible at the following URLs:
 - Staging & Onboarding: <https://dev.aboutads.info>
 - Production: <https://optout.aboutads.info/>
 
-2.  **Credentials**. The staging environment is essentially a sandbox
+**Credentials**. The staging environment is essentially a sandbox
     where companies’ opt-out functionality can be tested without being
     released to the public.
 
@@ -391,7 +391,7 @@ a URL.</td>
 </tbody>
 </table>
 
-<u>Response URL:</u>
+*<u>Response URL:</u>*
 
 \<rd\>/token/\<participant_id\>/**\<cookie-status\>-\<other-status\>**/\<token\>
 
@@ -588,7 +588,7 @@ Reserved for future use</p></td>
 \<rd\>/finish/\<participant_id\>/\<action_id\>/\<cookie-result\>-\<other-result\>/\<message\>
 
 <u>Example:</u>
-`http://www.aboutads.info**/token/**123/1-1/magic_string`
+`http://www.aboutads.info/token/123/1-1/magic_string`
 
 
 ## V. ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP
