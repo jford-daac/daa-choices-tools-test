@@ -8,7 +8,7 @@ choice from data collection and use for IBA across major browsers.
 
 The new feature set in WebChoices is particularly relevant when
 companies use non-third party cookies (First-Party Cookies) or
-cookie-less<sup>1</sup>/non-cookie technologies for interest-based
+cookie-less[^1]/non-cookie technologies for interest-based
 advertising (“IBA”) (collectively “non-cookie technologies”).
 Companies using non-cookie tech should integrate with WebChoices 2.0
 as it makes setting opt outs more transparent and allows opt outs to
@@ -21,14 +21,7 @@ occur automatically. However, you may need to whitelist the
 subdomains - <u>optout.aboutads.info and dev.aboutads.info for testing
 purposes</u>.
 
-Links to access the WebChoices Tool should point to
- <u>[optout.aboutads.info](https://optout.aboutads.info]</u>.
-
-<sup>1</sup> Cookie-less technologies in this WebChoices document do
-NOT include IDFA, AAID, hashed emails and phone numbers. DAA offers
-different tools: AppChoices, for consumers to set preferences in the
-in-app environment and YAC Token Tool for consumers to set preferences
-for hashed identifiers.
+Links to access the WebChoices Tool should point to [optout.aboutads.info](https://optout.aboutads.info).
 
 ## WebChoices
 
@@ -713,3 +706,11 @@ URL Parameters
     important that an adequate response time be maintained on all
     company endpoints to ensure timely opt-out delivery to consumers’
     browsers.
+
+---
+
+[^1]: Cookie-less technologies in this WebChoices document do
+NOT include IDFA, AAID, hashed emails and phone numbers. DAA offers
+different tools: AppChoices, for consumers to set preferences in the
+in-app environment and YAC Token Tool for consumers to set preferences
+for hashed identifiers.
