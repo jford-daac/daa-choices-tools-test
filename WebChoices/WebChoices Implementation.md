@@ -1,109 +1,92 @@
-> Confidential
->
-> Implementation instructions for DAA Participants from the “[<u>the
-> choice page</u>](http://www.aboutads.info/choices/)” to WebChoices.
->
-> WebChoices allows for the transparent and reliable setting of opt-out
-> choice from data collection and use for IBA across major browsers.
->
-> The new feature set in WebChoices is particularly relevant when
-> companies use non-third party cookies (First-Party Cookies) or
-> cookie-less<sup>1</sup>/non-cookie technologies for interest-based
-> advertising (“IBA”) (collectively “non-cookie technologies”).
-> Companies using non-cookie tech should integrate with WebChoices 2.0
-> as it makes setting opt outs more transparent and allows opt outs to
-> be set in more cases than in the current version.
->
-> If your company does NOT engage in third-party IBA using non-cookie
-> technologies, then you do not need to manually integrate with this
-> tool, as migration from the current choice page to WebChoices will
-> occur automatically. However, you may need to whitelist the
-> subdomains - <u>optout.aboutads.info and dev.aboutads.info for testing
-> purposes</u>.
->
-> Links to access the WebChoices Tool should point to
-> <u>optout.aboutads.info</u>.
->
-> CONFIDENTIAL - DO NOT FORWARD OR SHARE
->
-> <sup>1</sup> Cookie-less technologies in this WebChoices document do
-> NOT include IDFA, AAID, hashed emails and phone numbers. DAA offers
-> different tools: AppChoices, for consumers to set preferences in the
-> in-app environment and YAC Token Tool for consumers to set preferences
-> for hashed identifiers.
->
-> WebChoices
->
-> Centralized Consumer Opt-Out Platform
+# Implementation Instructions for DAA Participants to WebChoices
+
+Implementation instructions for DAA Participants from the “[<u>the
+choice page</u>](http://www.aboutads.info/choices/)” to WebChoices.
+
+WebChoices allows for the transparent and reliable setting of opt-out
+choice from data collection and use for IBA across major browsers.
+
+The new feature set in WebChoices is particularly relevant when
+companies use non-third party cookies (First-Party Cookies) or
+cookie-less<sup>1</sup>/non-cookie technologies for interest-based
+advertising (“IBA”) (collectively “non-cookie technologies”).
+Companies using non-cookie tech should integrate with WebChoices 2.0
+as it makes setting opt outs more transparent and allows opt outs to
+be set in more cases than in the current version.
+
+If your company does NOT engage in third-party IBA using non-cookie
+technologies, then you do not need to manually integrate with this
+tool, as migration from the current choice page to WebChoices will
+occur automatically. However, you may need to whitelist the
+subdomains - <u>optout.aboutads.info and dev.aboutads.info for testing
+purposes</u>.
+
+Links to access the WebChoices Tool should point to
+ <u>optout.aboutads.info</u>.
+
+<sup>1</sup> Cookie-less technologies in this WebChoices document do
+NOT include IDFA, AAID, hashed emails and phone numbers. DAA offers
+different tools: AppChoices, for consumers to set preferences in the
+in-app environment and YAC Token Tool for consumers to set preferences
+for hashed identifiers.
+
+## WebChoices
+
+Centralized Consumer Opt-Out Platform
 
 ### PUBLISHED/UPDATED October 2025
 
-> This document describes how the opt-out platform works and how to
-> integrate your company’s opt-out infrastructure with the WebChoices
-> tool.
->
-> This opt-out platform is backwards compatible with the DAA’s old
-> choice page.
+This document describes how the opt-out platform works and how to
+integrate your company’s opt-out infrastructure with the WebChoices
+tool.
+
+This opt-out platform is backwards compatible with the DAA’s old
+choice page.
 
 ### Onboarding and Management \| Cookies and Extension Opt Outs
 
-> Companies integrating new or updated endpoints can use
-> dev.aboutads.info to test their cookie-based opt outs alongside
-> extension-based opt outs. The development site will include a link to
-> the Protect My Choices extension, to which the site can write.
-> Companies can then install the extension to verify their ability to
-> read and decode the AdChoices Signal.
+Companies integrating new or updated endpoints can use
+dev.aboutads.info to test their cookie-based opt outs alongside
+extension-based opt outs. The development site will include a link to
+the Protect My Choices extension, to which the site can write.
+Companies can then install the extension to verify their ability to
+read and decode the AdChoices Signal.
 
-### \> The WebChoices tool resides at: optout.aboutads.info. \<
+The WebChoices tool resides at: [optout.aboutads.info](https://optout.aboutads.info)
 
-> Some links to access the WebChoices Tool point to
-> [<u>www.aboutads.info/choices</u>](http://www.aboutads.info/choices),
-> the old URL for the DAA Choice Page. DAA will redirect to this sub
-> domain.
->
-> This integration guide contains five sections:
+Some links to access the WebChoices Tool point to
+[<u>www.aboutads.info/choices</u>](http://www.aboutads.info/choices),
+the old URL for the DAA Choice Page. DAA will redirect to this sub
+domain.
 
-1.  **CONSUMER OPT-OUT EXPERIENCE**
+This integration guide contains five sections:
 
-An overview of the new opt-out platform additions **4**
+1.  CONSUMER OPT-OUT EXPERIENCE
+- An overview of the new opt-out platform additions
 
 2.  WEBCHOICES DEVELOPMENT AND PRODUCTION SITES
-
-Company information management. **5**
+- Company information management.
 
 3.  [ONBOARDING PROCESS](#onboarding-process)
-
-Instructions for activating your organization to the new opt-out tool.
-**6**
+- Instructions for activating your organization to the new opt-out tool.
 
 4.  [CONSUMER OPT-OUT INTEGRATION SPECIFICATION](#_TOC_250001)
+- New browser status reporting
+- General Requirements
+- Status and Token
+- Opt Out
 
-New browser status reporting. **7**
-
-General Requirements 7
-
-Status and Token 10
-
-Opt Out 12
-
-5.  [ESTABLISHING A FIRST PARTY TRUST
-    RELATIONSHIP](#establishing-a-first-party-trust-relationship)
-
-How to set an opt-out cookie in the “From Visited” scenario when
-browsers block third-party cookies with the new opt-out tool. **15**
-
-Request 15
-
-Response 16
-
-Guidelines For using a Trust Cookie (session cookie) 16
-
-Guidelines for response 16
+5.  [ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP](#establishing-a-first-party-trust-relationship)
+- How to set an opt-out cookie in the “From Visited” scenario when
+browsers block third-party cookies with the new opt-out tool.
+- Request
+- Response
+- Guidelines For using a Trust Cookie (session cookie)
+- Guidelines for response
 
 # CONSUMER OPT-OUT EXPERIENCE
 
-> The purpose of the WebChoices opt-out tool is to provide consumers
-> with a destination to:
+The purpose of the WebChoices opt-out tool is to provide consumers with a destination to:
 
 1.  Identify a list of companies who have committed to conducting
     responsible advertising practices in alignment with the DAA’s
@@ -116,16 +99,11 @@ Guidelines for response 16
     data for Interest-Based Advertising from one, several, or all of the
     companies listed on the WebChoices tool.
 
-4.  ~~The Opt-Out functionality flowchart demonstrates the high-level
-    decision logic implemented by the new WebChoices opt-out platform.
-    This is provided to help companies understand the structure of the
-    new opt-out platform and to help them implement the WebChoices op~~
-
 # WEBCHOICES DEVELOPMENT AND PRODUCTION SITES
 
-> This section provides instructions on how a company can access the
-> WebChoices development site to test integrations before deploying them
-> to consumers.
+This section provides instructions on how a company can access the
+WebChoices development site to test integrations before deploying them
+to consumers.
 
 1.  **Access**. WebChoices is accessible at the following URLs:
 
@@ -136,17 +114,15 @@ Guidelines for response 16
 2.  Production:
     [<u>http://optout.aboutads.info</u>](http://optout.aboutads.info/)
 
-<!-- -->
-
 2.  **Credentials**. The staging environment is essentially a sandbox
     where companies’ opt-out functionality can be tested without being
     released to the public.
 
 # ONBOARDING PROCESS
 
-> This section provides information on how companies can onboard their
-> organization’s information and endpoints to the WebChoices opt-out
-> platform.
+This section provides information on how companies can onboard their
+organization’s information and endpoints to the WebChoices opt-out
+platform.
 
 1.  **Step 1 - Email Contact**: Each company currently listed on the
     current choice page will receive an email invitation to start the
@@ -201,9 +177,9 @@ Guidelines for response 16
 
 # CONSUMER OPT-OUT INTEGRATION SPECIFICATION
 
-> This section describes what is required to implement a WebChoices
-> Opt-Out Service Endpoint capable of integrating with the cookie-based
-> WebChoices consumer opt-out tool.
+This section describes what is required to implement a WebChoices
+Opt-Out Service Endpoint capable of integrating with the cookie-based
+WebChoices consumer opt-out tool.
 
 ## General Requirements
 
@@ -237,10 +213,9 @@ Guidelines for response 16
     reliably set opt-out choices in third-party cookie blocking
     environments. Consistent with DAA Principles, any use of technology
     (including cookies) may still be permissible so long as the data
-    cannot be collected or used for IBA after an
-
-> opt-out choice. Violating this requirement may result in a breach of
-> the terms under which this tool is offered to companies.
+    cannot be collected or used for IBA after an opt-out choice. Violating 
+    this requirement may result in a breach of the terms under which this tool 
+    is offered to companies.
 
 5)  Companies may not exploit the trusted relationship established via
     WebChoices tool. But companies may leverage their existing 1st party
@@ -326,14 +301,13 @@ Guidelines for response 16
 | Referer | http://\<dev \| staging \| qa \| integrate \| www \| optout\>.aboutads.info/\* |
 | Accept | text/html,application/xhtml+xml |
 
-> *<u>Sample Requests URLs:</u>*
->
-> <http://your.domain/with/path/to/endpoint>
->
-> ?action_id=3 &participant_id=10
->
-> &rd=http%3A%2F%2F[www.aboutads.info](http://www.aboutads.info/)
-> &nocache=223442
+*<u>Sample Requests URLs:</u>*
+
+http://your.domain/with/path/to/endpoint
+?action_id=3
+&participant_id=10
+&rd=http%3A%2F%2Fwww.aboutads.info
+&nocache=223442
 
 | **Field** | **Data Type** | **Description** |
 |----|:--:|----|
@@ -655,38 +629,38 @@ Reserved for future use</p></td>
 
 # ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP
 
-> This is a new feature available for all companies, regardless if they
-> utilize cookies exclusively or also use non-cookie technologies for
-> IBA. It is especially designed as a way to reliably set choice for
-> non-cookie tech in third-party cookie-blocking environments, but all
-> companies may use it to future-proof their choice systems or for other
-> reasons, consistent with DAA Principles.
->
-> In order to support browsers that restrict setting cookies in
-> third-party contexts, it has become necessary to add a new action_id
-> to the existing action_ids currently required from participant
-> endpoints.
->
-> This new request, known as action_id=5, is only used when a browser is
-> configured to reject third-party cookies, but allows setting
-> third-party cookies from sites “previously visited”. There is no
-> callback request or verification and it is the company’s
-> responsibility to maintain a responsive endpoint.
->
-> The purpose of this request is to set a session cookie so that a
-> temporary trust relationship is created with the browser. Any cookies
-> set during this process will be established in a first party context
-> with your domain. This will allow the subsequent opt-out request
-> (action_id=4) to set an opt-out cookie in a third-party context.
->
-> If the browser does not already have a first-party cookie set from the
-> company’s domain, this will create a trust relationship with the
-> browser that may not have been otherwise possible. If an enhanced
-> trust relationship is created as a part of this process, you may need
-> to indicate this in the cookie value. This will allow you to prevent
-> your systems from setting any additional cookies (such as frequency
-> capping, ad delivery & reporting) once an opt-out is set on browsers
-> where an enhanced trust relationship exists.
+This is a new feature available for all companies, regardless if they
+utilize cookies exclusively or also use non-cookie technologies for
+IBA. It is especially designed as a way to reliably set choice for
+non-cookie tech in third-party cookie-blocking environments, but all
+companies may use it to future-proof their choice systems or for other
+reasons, consistent with DAA Principles.
+
+In order to support browsers that restrict setting cookies in
+third-party contexts, it has become necessary to add a new action_id
+to the existing action_ids currently required from participant
+endpoints.
+
+This new request, known as action_id=5, is only used when a browser is
+configured to reject third-party cookies, but allows setting
+third-party cookies from sites “previously visited”. There is no
+callback request or verification and it is the company’s
+responsibility to maintain a responsive endpoint.
+
+The purpose of this request is to set a session cookie so that a
+temporary trust relationship is created with the browser. Any cookies
+set during this process will be established in a first party context
+with your domain. This will allow the subsequent opt-out request
+(action_id=4) to set an opt-out cookie in a third-party context.
+
+If the browser does not already have a first-party cookie set from the
+company’s domain, this will create a trust relationship with the
+browser that may not have been otherwise possible. If an enhanced
+trust relationship is created as a part of this process, you may need
+to indicate this in the cookie value. This will allow you to prevent
+your systems from setting any additional cookies (such as frequency
+capping, ad delivery & reporting) once an opt-out is set on browsers
+where an enhanced trust relationship exists.
 
 ## Request
 
@@ -742,11 +716,3 @@ Reserved for future use</p></td>
     important that an adequate response time be maintained on all
     company endpoints to ensure timely opt-out delivery to consumers’
     browsers.
-
-> This document is the Confidential Information of the DAA and may only
-> be used for the purposes of integrating with the WebChoices opt-out
-> tool. It is subject to all confidentiality agreements between and
-> among the DAA, you and your company. The information contained in this
-> document may not be used to reverse-engineer, deconstruct,
-> disassemble, or decompile any DAA software or the software of any
-> other DAA Participant.
