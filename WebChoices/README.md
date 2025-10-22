@@ -10,10 +10,7 @@ Provides consumers with a destination to:
 - Opt out of data collection and use for IBA from one, several, or all listed companies.
 
 ### Tool Access
-The WebChoices tool resides at [optout.aboutads.info](https://optout.aboutads.info).
-
-### Onboarding Process
-Companies use an administration portal to upload and modify their company information and opt-out endpoints, replacing the need for XML documents.
+The WebChoices tool resides at [optout.aboutads.info](https://optout.aboutads.info)
 
 ### Integration Requirements for Opt-Out Service Endpoints
 - **Browser Compatibility:** Endpoints must function reliably and quickly on all major browsers and operating systems (desktop and mobile).
@@ -26,5 +23,5 @@ Companies use an administration portal to upload and modify their company inform
 - **Opt Out Failures:** All failures/errors must return a result for processing to avoid endpoint deactivation.
 - **Performance:** Endpoints must respond quickly, ideally using HTTP 302 redirects for non-cookie technologies.
 - **Status and Token (action_id=3):** Endpoints must return the consumer's status regarding IBA identifiers or opt-outs, including cookie-status and other-status for non-cookie technologies.
-- **Opt Out (action_id=4)*:** Endpoints facilitate opting out by setting an opt-out cookie (for cookie tech) and persisting opt-out on the server (for server-side non-cookie tech). Responses include cookie-result and other-result.
+- **Opt Out (action_id=4):** Endpoints facilitate opting out by setting an opt-out cookie (for cookie tech) and persisting opt-out on the server (for server-side non-cookie tech). Responses include cookie-result and other-result.
 - **Establishing a First-Party Trust Relationship (action_id=5):** This new feature is critical for setting opt-outs reliably in third-party cookie-blocking environments. It involves setting a session cookie (e.g., FPtrust=1) via HTTP headers from the company's domain, creating a temporary trust relationship. JavaScript is prohibited in this step.
