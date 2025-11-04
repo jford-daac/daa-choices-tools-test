@@ -29,9 +29,7 @@ Bridging User Choices
 
 [Appendix 7: AdChoices Signal Usage Illustration](#appendix-7-adchoices-signal-usage-illustration)
 
-[Appendix 8: User Journey From AdChoices Icon To CMP](#appendix-8-user-journey-from-adchoices-icon-to-cmp)
-
-[Appendix 9: Reading The AdChoices Signal From The PMC Extension](#appendix-9-reading-the-adchoices-signal-from-the-pmc-extension)
+[Appendix 8: Reading The AdChoices Signal From The PMC Extension](#appendix-8-reading-the-adchoices-signal-from-the-pmc-extension)
 
 ## Introduction
 
@@ -45,7 +43,7 @@ The new tighter integration of WebChoices and Protect My Choices means that comp
 
 The DAA's strategic approach to tool development over recent years has prioritized modularity and adaptability to emerging identifier technologies, ensuring we can consistently uphold our mandate to provide consumers with meaningful transparency and choice.
 
-The AdChoices Signal is an encoding of users' IBA preferences that can be passed to DAA Participants from DAA tools, retrieved by DAA Participants from HTTP headers or on-page JavaScript for users with Protect My Choices installed, or via CMPs working with DAA (as shown in Appendix 7). Participants in the ecosystem are expected to modify their IBA data collection and/or use behavior according to the preferences expressed in this string, consistent with the Self-Regulatory Principles[^1] in the jurisdiction(s) where they operate.
+The AdChoices Signal is an encoding of users' IBA preferences that can be passed to DAA Participants from DAA tools, retrieved by DAA Participants from HTTP headers or on-page JavaScript for users with Protect My Choices installed, as shown in Appendix 7. Participants in the ecosystem are expected to modify their IBA data collection and/or use behavior according to the preferences expressed in this string, consistent with the Self-Regulatory Principles[^1] in the jurisdiction(s) where they operate.
 
 ## Overview
 
@@ -163,7 +161,7 @@ The same applies in the case of a preference with a token-based identifier, for 
 
 ### Browser Extension: Protect My Choices 
 
-When consumers install the Protect My Choices (v2.0) extension, any preferences expressed through the YourAdChoices tools will be stored as a string in the extension, according to this AdChoices Signal specification document. The value of the string can be read by any participant with the code on page, either via JavaScript or by looking for specific HTTP headers set by the extension (see Appendix 9 for illustration). For more details on how to access the AdChoices Signal in cases where consumers have the Protect My Choices extension installed, refer to the [PMC technical specifications documentation](https://digitaladvertisingalliance.org/DAA_style/ADS/PMC_V2_Tech_Spec.pdf).
+When consumers install the Protect My Choices (v2.0) extension, any preferences expressed through the YourAdChoices tools will be stored as a string in the extension, according to this AdChoices Signal specification document. The value of the string can be read by any participant with the code on page, either via JavaScript or by looking for specific HTTP headers set by the extension (see Appendix 8 for illustration). For more details on how to access the AdChoices Signal in cases where consumers have the Protect My Choices extension installed, refer to the [PMC technical specifications documentation](https://digitaladvertisingalliance.org/DAA_style/ADS/PMC_V2_Tech_Spec.pdf).
 
 ### Passing Between Participating Companies
 
@@ -181,15 +179,11 @@ It is recommended that participating companies support a macro to allow an AdCho
 
 ## Using the AdChoices Signal
 
-### Consent Management Platforms
-
-CMPs may participate in the DAA YourAdChoices tool. In that case, they can receive the AdChoices Signal as described in the "DAA YourAdChoices Tool" section when the user makes choices in this tool. This string can be stored in any manner desired by the CMP and made available to a publisher's or brand's vendor partners and subsequently passed onwards. For example, a CMP can enable a publisher to pass the AdChoices Signal to the ad exchange(s) the publisher or brand uses, who can then pass it onwards to a demand-side platform(s) via OpenRTB. Authorized CMPs may also provide links to YourAdChoices (within the CMP user interface) for users that wish to update their preferences.
-
 ### Ad Networks, SSPs, Exchanges, DSPs, and Other Companies Who Engage in IBA
 
 Participants receiving an AdChoices Signal must respect the choice statuses expressed within it (similar to the behavior they have used when encountering an opt out cookie) and should use the category preferences provided to modify their IBA behavior. For example, a DSP or CDP (customer data platform) receiving such a string could store it in their user profile storage and read it back when making decisions. Participants must also respect any AdChoices Signal passed to them at a given transaction; for example, if a DSP receives an AdChoices Signal in the bid request for a user.
 
-For clarity, it is **not** required that AdChoices Signals be handled in real-time only on a per-transaction basis --- participants should store the user's preferences when the YourAdChoices tool makes a call to the choice status endpoint, if possible. Real-time passing is supported so that choice information can be expressed to parties who may not already be able to identify a user. For example, a CMP may be able to identify a user and that they have made choices, even if an exchange or a DSP has not yet assigned identity to the user. The real-time passing allows for preferences to be respected if those other parties establish identity later, for example, through probabilistic methods.
+For clarity, it is **not** required that AdChoices Signals be handled in real-time only on a per-transaction basis --- participants should store the user's preferences when the YourAdChoices tool makes a call to the choice status endpoint, if possible. Real-time passing is supported so that choice information can be expressed to parties who may not already be able to identify a user. The real-time passing allows for preferences to be respected if those other parties establish identity later, for example, through probabilistic methods.
 
 ***Important:* Generation of the string occurs only in the YourAdChoices tool so that multiple parties may independently store the current preferences without the issue of conflicting versions. (Refer to the diagram in [Appendix 7](#appendix-7-adchoices-signal-usage-illustration) for clarification.)**
 
@@ -346,11 +340,7 @@ In OpenRTB 2.6, there is also an object called ```regs``` ([section 3.2.3 of the
 
 ![](https://assets.youradchoices.ca/acs/appendix7.png)
 
-## Appendix 8: User Journey From AdChoices Icon To CMP
-
-![](https://assets.youradchoices.ca/acs/appendix8.png)
-
-## Appendix 9: Reading The AdChoices Signal From The PMC Extension
+## Appendix 8: Reading The AdChoices Signal From The PMC Extension
 
 ![](https://assets.youradchoices.ca/acs/appendix9.png)
 
