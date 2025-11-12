@@ -5,7 +5,7 @@ The [WebChoices Implementation document](https://github.com/rvidakovic/daa-choic
 
 ### Purpose
 Provides consumers with a destination to:
-- Identify DAA-aligned companies.
+- Identify DAA-aligned companies
 - Receive a detailed report of companies engaging in IBA on their browser.
 - Opt out of data collection and use for IBA from one, several, or all listed companies.
 
