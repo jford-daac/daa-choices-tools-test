@@ -207,7 +207,7 @@ WebChoices consumer opt-out tool.
     opt-out cookies.
 - Use Request Referrers to limit access to a company’s endpoint, but
     each one must permit requests from allowable subdomains including
-    dev, integrate, qa, staging, www and optout. Overly restrictive
+    dev, www and optout. Overly restrictive
     referrer validation logic within a company’s endpoint can interfere
     with critical quality assurance processes when onboarding new
     companies or when releasing new features to the opt-out tool.
@@ -234,7 +234,7 @@ WebChoices consumer opt-out tool.
 
 | **Attribute** | **Description / value** |
 |----|----|
-| Referer | http://\<dev \| staging \| qa \| integrate \| www \| optout\>.aboutads.info/\* |
+| Referer | https://\<dev \| www \| optout\>.aboutads.info/\* |
 | Accept | text/html,application/xhtml+xml |
 
 *<u>Sample Request URL:</u>*
@@ -403,8 +403,7 @@ must also be persisted on the company’s server.
 <tbody>
 <tr>
 <td style="text-align: center;">Referer</td>
-<td>http://&lt;dev | staging | qa | integrate | www |
-optout&gt;.aboutads.info/*</td>
+<td>https://&lt;dev | www | optout&gt;.aboutads.info/*</td>
 </tr>
 <tr>
 <td style="text-align: center;">Accept</td>
@@ -604,7 +603,7 @@ Headers
 
 | **Attribute** | **Description / value** |
 |----|----|
-| Referer | http://\<dev \| staging \| qa \| integrate \| www \| optout\>.aboutads.info/\* |
+| Referer | https://\<dev \| www \| optout\>.aboutads.info/\* |
 | Accept | text/html,application/xhtml+xml |
 
 *<u>Sample Request URL:</u>*
