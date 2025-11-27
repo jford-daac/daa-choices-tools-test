@@ -2,7 +2,7 @@
 
 ## WebChoices | Cookies and Extension Opt Outs
 
-Centralized Consumer Opt-Out Platform
+Centralized Consumer Opt-Out Platform!
 
 WebChoices provides transparent and reliable opt-out choice from 
 data collection and use for interest-based advertising (IBA) across 
