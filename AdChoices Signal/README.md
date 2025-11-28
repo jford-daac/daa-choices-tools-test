@@ -1,5 +1,5 @@
 # AdChoices Signal Specification
-This specification defines the format for encoding users' IBA preferences. It is designed to be extensible and can be associated with various identifiers such as cookie IDs, mobile advertising IDs, or hashed emails.
+This specification defines the format for encoding users' interest-based advertising (IBA) preferences. It is designed to be extensible and can be associated with various identifiers such as cookie IDs, mobile advertising IDs, or hashed emails.
 
 ## Key Concepts
 
@@ -17,9 +17,9 @@ The signal includes:
 - Per-Category Preferences Section: Contains a count of per-category preference records, followed by individual category IDs and the user's preference for that category (e.g., limit or allow/include for a specific interest category). Records are not included if the choice status for the category is "no preference".
 
 ### Usage and Passing
-The AdChoices Signal can be received, read, and passed between participating companies in several ways:
+The AdChoices Signal can be received, read, and passed between participating companies in several ways: 
 - DAA YourAdChoices Tool: Companies receive the signal directly via their integration endpoint, often with token-based identifiers. The string generation occurs only in the YourAdChoices tool to prevent conflicting versions.
-- Protect My Choices Browser Extension: When installed, user preferences are stored in the extension as an AdChoices Signal string. Companies can read this value via JavaScript or by looking for specific HTTP headers (e.g., "X-Adchoices" for Chrome, "Cookie2" for Safari) set by the extension.
+- Protect My Choices Browser Extension: When installed (e.g. after visiting the DAA WebChoices tool), user preferences are stored in the extension as an AdChoices Signal string. Companies can read this value via JavaScript or by looking for specific HTTP headers (e.g., "X-Adchoices" for Chrome, "Cookie2" for Safari) set by the extension.
 - URL-Based Passing: The signal can be included as a adchoices_signal parameter in URLs when making calls between parties (e.g., SSPs to DSPs).
 - Macros: Recommended macro ${ADCHOICES_SIGNAL} for passing to third-party ad servers or measurement vendors.
 
