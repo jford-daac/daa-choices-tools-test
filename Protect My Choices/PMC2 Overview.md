@@ -48,7 +48,7 @@ PMC 2.0 goes beyond the third-party cookie model with a signal-based approach th
 PMC 2.0 supports the following browsers:
 
 - **Google Chrome**
-- **Mozilla Firefox**
+- **Mozilla Firefox** (coming soon!)
 - **Safari**
 
 ### Legacy Functionality
