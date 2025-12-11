@@ -326,9 +326,7 @@ This is the existing specification and can continue to be used by companies that
 
 ### Response (New Specification)
 
-This response is required is for participants. Companies utilizing
-non-cookie technologies are required to provide accurate opt-out
-result as specified below.
+This response is required is for participants. Companies utilizing non-cookie technologies are required to provide accurate opt-out result as specified below.
 
 <table>
 <colgroup>
@@ -390,6 +388,7 @@ result as specified below.
 <u>Example:</u>
 `http://optout.aboutads.info/token/123/1-1/magic_string`
 
+## AdChoices Signal-Based Integrations
 
 ## V. ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP
 
