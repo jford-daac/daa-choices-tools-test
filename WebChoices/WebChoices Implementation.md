@@ -397,7 +397,7 @@ This response is required for participants. Companies that use non-cookie techno
 
 4.  The company's response time shall be below 250ms. Timeouts for this step are very low. To facilitate a positive user experience, it is vital to maintain adequate response times across all company endpoints to ensure timely opt-out delivery to consumers' browsers.
 
-## Protect My Choices Browser Extension
+### Protect My Choices Browser Extension
 
 Once the opt-out process is complete, consumers will be prompted to install the DAA's Protect My Choices browser extension. In some browsers (for example, Safari), this prompt appears before the opt-out flow begins.
 
