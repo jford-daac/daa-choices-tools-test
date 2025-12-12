@@ -405,7 +405,7 @@ Protect My Choices stores the consumer's choices locally using the AdChoices Sig
 
 The AdChoices Signal is placed on the consumer's device via a short-term first-party cookie set by the DAA after the consumer completes their opt-out(s) in WebChoices. The PMC extension will read that short-term cookie and store the AdChoices Signal indefinitely or until the consumer makes different selections.
 
-See our [AdChoices Signal](../AdChoices_Signal) and [AdChoices Signal](../Protect_My_Choices) documentation for more information about these mechanisms.
+See our **AdChoices Signal** and **Protect My Choices** documentation for more information about these mechanisms.
 
 ## AdChoices Signal-Based Integrations
 
