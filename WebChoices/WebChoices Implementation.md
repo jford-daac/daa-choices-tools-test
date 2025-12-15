@@ -401,9 +401,9 @@ This response is required for participants. Companies that use non-cookie techno
 
 Once the opt-out process is complete, consumers will be prompted to install the DAA's Protect My Choices browser extension. In some browsers (for example, Safari), this prompt appears before the opt-out flow begins.
 
-Protect My Choices stores the consumer's choices locally using the AdChoices Signal. In browsers that support third-party cookies, these AdChoices Signal choices mirror the consumer's cookie-based choices in WebChoices. In those same browsers only, the extension can also re-create opt-out cookies if the consumer deletes cookies. This cookie re-creation applies only to opt-out cookies for companies included in WebChoices, and the extension does not re-create any other cookies.
+Protect My Choices ("PMC") stores the consumer's choices locally using the AdChoices Signal. In browsers that support third-party cookies, these AdChoices Signal choices mirror the consumer's cookie-based choices in WebChoices. In those same browsers only, the extension can also re-create opt-out cookies if the consumer deletes cookies. This cookie re-creation applies only to opt-out cookies for companies included in WebChoices, and the extension does not re-create any other cookies.
 
-The AdChoices Signal is placed on the consumer's device via a short-term first-party cookie set by the DAA after the consumer completes their opt-out(s) in WebChoices. The PMC extension will read that short-term cookie and store the AdChoices Signal indefinitely or until the consumer makes different selections.
+The AdChoices Signal is placed on the consumer's device via a short-term first-party cookie set by the DAA after the consumer completes their opt-out(s) in WebChoices. The PMC extension will read that short-term cookie and store the AdChoices Signal indefinitely or until the consumer makes different selections (such as removing the PMC extension).
 
 See our **AdChoices Signal** and **Protect My Choices** documentation for more information about these mechanisms.
 
@@ -411,13 +411,13 @@ See our **AdChoices Signal** and **Protect My Choices** documentation for more i
 
 Even if your company mainly uses third-party cookies for ad targeting today, it's still a good idea to implement the AdChoices Signal now. It helps future-proof your implementation by carrying consumer choice signals across newer targeting approaches (hashed email, phone-based identifiers, IP-based signals, probabilistic methods, etc.), including in browsers where third-party cookies are limited or unavailable.
 
-For browsers that do not support third-party cookies, consumers can still use WebChoices to make IBA choice requests. In these environments, choice requests are stored in the Protect My Choices (PMC) extension using the AdChoices Signal specification. Companies can access these choice requests either by using a reader or by interrogating request headers.
+For browsers that do not support third-party cookies, consumers can still use WebChoices to make IBA choice requests. In these environments, choice requests are stored in the Protect My Choices extension using the AdChoices Signal specification. Companies can access these choice requests either by using a reader or by interrogating request headers.
 
 The DAA will list a company in the non-third-party-cookie version of WebChoices only after validating that the company has deployed one of the supported methods to access choice requests (reader, header-based approach, or another approved method).
 
 **Note:** In non-third-party-cookie environments, the PMC browser extension stores the AdChoices Signal only and does not regenerate or "harden" opt-out cookies. 
 
-### <ins>Option 1:</ins> Reader
+### <ins>Option 1:</ins> JavaScript Reader
 
 Use a "reader" component to retrieve AdChoices Signal choice requests from the PMC environment and apply them to your ad delivery and/or measurement flows.
 
@@ -426,7 +426,7 @@ What this typically means:
 - On each relevant decision point (ad request, bid request, personalization decision), read the consumer's current choice state.
 - Ensure the choice state is respected consistently.
 
-### <ins>Option 2:</ins> Header Interrogation
+### <ins>Option 2:</ins> HTTP Header Inspection
 
 Instead of using a dedicated reader, you can access AdChoices Signal choices by inspecting headers on incoming requests (for example, when your infrastructure receives ad calls, bid requests, or tag calls).
 
