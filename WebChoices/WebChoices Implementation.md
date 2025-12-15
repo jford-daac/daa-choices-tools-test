@@ -226,7 +226,7 @@ Example for a company using only cookie technology:
 
 Opt out a consumer from the collection and use of data for IBA by setting an "opt-out" cookie on the consumer's browser. **This action reports success or failure and must be based on the actual presence of the opt-out cookie in the consumer's browser**. Verification of the presence of the "opt-out" cookie is usually accomplished by redirecting to a verification page or script before redirecting the result signal back to the WebChoices tool. If using server-side non-cookie technologies (e.g., statistical identifiers), the opt-out must also be persisted on the company's server.
 
-### Request
+#### Request
 
 <table>
 <colgroup>
@@ -268,7 +268,7 @@ Opt out a consumer from the collection and use of data for IBA by setting an "op
 | token | string | Optional anti-CSRF string if returned during the status check |
 | nocache | string | Ignore: cache buster |
 
-### Response (Legacy Specification)
+#### Response (Legacy Specification)
 
 This is the existing specification and can continue to be used by companies that are utilizing only cookie-based identifiers for IBA purposes.
 
@@ -323,7 +323,7 @@ This is the existing specification and can continue to be used by companies that
 <u>Example:</u>
 `http://optout.aboutads.info/finish/123/4/1/simple_string`
 
-### Response (New Specification)
+#### Response (New Specification)
 
 This response is required for participants. Companies that use non-cookie technologies are required to provide an accurate opt-out result as specified below.
 
@@ -417,7 +417,7 @@ The DAA will list a company in the non-third-party-cookie version of WebChoices 
 
 **Note:** In non-third-party-cookie environments, the PMC browser extension stores the AdChoices Signal only and does not regenerate or "harden" opt-out cookies. 
 
-### <ins>Option 1:</ins> JavaScript Reader
+### <ins>Option 1</ins>: JavaScript Reader
 
 Use a "reader" component to retrieve AdChoices Signal choice requests from the PMC environment and apply them to your ad delivery and/or measurement flows.
 
@@ -426,7 +426,7 @@ What this typically means:
 - On each relevant decision point (ad request, bid request, personalization decision), read the consumer's current choice state.
 - Ensure the choice state is respected consistently.
 
-### <ins>Option 2:</ins> HTTP Header Inspection
+### <ins>Option 2</ins>: HTTP Header Inspection
 
 Instead of using a dedicated reader, you can access AdChoices Signal choices by inspecting headers on incoming requests (for example, when your infrastructure receives ad calls, bid requests, or tag calls).
 
@@ -435,7 +435,7 @@ What this typically means:
 - If present, your systems interpret the header values to determine whether IBA is permitted for that user/session/context.
 - You propagate the interpreted choice to downstream systems (decisioning, bidding, measurement) in a controlled and auditable way.
 
-### <ins>Option 3:</ins> Other Approved Methods
+### <ins>Option 3</ins>: Other Approved Methods
 
 If your stack uses a specialized integration path (for example, a wrapper/module approach such as a Prebid module), coordinate validation with the DAA.
 
