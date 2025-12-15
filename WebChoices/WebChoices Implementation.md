@@ -86,7 +86,7 @@ Your organization's POC will receive an email from the DAA to the email address 
 - The recommended approach for companies that are not using non-cookie technologies is to use HTTP 302 redirects whenever possible. Endpoints that use JavaScript for browser redirection must focus particularly on browser compatibility and rapid response times. Each company endpoint has a limited time to deliver a response, and JavaScript (or chained redirects) can add undesirable processing time and possibly cause a failure to be reported to the consumer if the endpoint exceeds a reasonable allowable transaction response time.
 
 
-### Status (Legacy Specification) and Token
+### Status (Legacy Specification) and Token: (action_id=3)
 
 #### Request
 
@@ -222,7 +222,7 @@ Example for a company using non-cookie technology:
 Example for a company using only cookie technology:
 `http://optout.aboutads.info/token/123/1-0/csrftoken`
 
-### Opt Out
+### Opt Out: (action_id=4)
 
 Opt out a consumer from the collection and use of data for IBA by setting an "opt-out" cookie on the consumer's browser. **This action reports success or failure and must be based on the actual presence of the opt-out cookie in the consumer's browser**. Verification of the presence of the "opt-out" cookie is usually accomplished by redirecting to a verification page or script before redirecting the result signal back to the WebChoices tool. If using server-side non-cookie technologies (e.g., statistical identifiers), the opt-out must also be persisted on the company's server.
 
