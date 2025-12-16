@@ -1,240 +1,98 @@
-# Implementation Instructions for DAA Participants to WebChoices
+# WebChoices Implementation Instructions
 
-## WebChoices | Cookies and Extension Opt Outs
+WebChoices provides a transparent, reliable opt-out from data collection and use for interest-based advertising (IBA) on major browsers. WebChoices and its Protect My Choices browser extension can request and store consumer choices via cookies and the AdChoices Signal.
 
-Centralized Consumer Opt-Out Platform!
+## Table of Contents
 
-WebChoices provides transparent and reliable opt-out choice from 
-data collection and use for interest-based advertising (IBA) across 
-major browsers. Companies integrating new or updated endpoints can 
-use dev.aboutads.info to test cookie-based and extension-based 
-opt-outs. The tool includes a link to the Protect My Choices extension, 
-to which the site can write. Companies can then install the extension 
-to verify their ability to read and decode the AdChoices Signal.
+[Introduction](#introduction)
 
-This document describes how the opt-out platform works and how to integrate 
-your company’s cookie-based opt-out infrastructure with the WebChoices tool. 
-The platform is fully backwards compatible with the DAA’s old choice page. 
-For testing purposes, companies may need to whitelist [optout.aboutads.info](https://optout.aboutads.info) and 
-[dev.aboutads.info](https://dev.aboutads.info).
+[Onboarding to WebChoices](#onboarding-to-webchoices)
 
-Links directing users to the WebChoices tool should point to [optout.aboutads.info](https://optout.aboutads.info). 
-Older links to www.aboutads.info/choices, the former URL for the DAA Choice Page, 
-will be redirected to the correct subdomain.
+[Cookie-Based Integrations](#cookie-based-integrations)
 
-## Contents
+[AdChoices Signal-Based Integrations](#adchoices-signal-based-integrations)
 
-This integration guide contains five sections:
+## Introduction
 
-I.  **[CONSUMER OPT-OUT EXPERIENCE](#i-consumer-opt-out-experience)**
-- An overview of the new opt-out platform additions
+The purpose of the WebChoices tool is to provide consumers with a destination to identify a list of participating companies that have committed to conducting responsible advertising practices and are engaged in IBA (or targeted advertising) on a consumer's browser[^1]; as well as to provide consumers the ability to opt out of the collection and use of data for IBA from one, several, or all of the companies listed on the WebChoices tool.
 
-II.  **[WEBCHOICES DEVELOPMENT AND PRODUCTION SITES](#ii-webchoices-development-and-production-sites)**
-- Company information management
+The tool also includes a link to the Protect My Choices extension, which the tool can write to. Consumers are prompted to install the extension to preserve their choices via third-party cookies and/or the AdChoices Signal, depending on their browser. The PMC can be read via headers or a JS reader[^2], and can provide choice requests to companies in use cases where targeted ads are being used without cookies.
 
-III.  **[ONBOARDING PROCESS](#iii-onboarding-process)**
-- Instructions for activating your organization to the new opt-out tool
+This document describes how the platform works and how to integrate your company's infrastructure with the WebChoices tool to set and/or read consumer choices[^3].
 
-IV.  **[CONSUMER OPT-OUT INTEGRATION SPECIFICATION](#iv-consumer-opt-out-integration-specification)**
-- New browser status reporting
-- General Requirements
-- Status and Token
-- Opt Out
+## Onboarding to WebChoices
 
-V.  **[ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP](#v-establishing-a-first-party-trust-relationship)**
-- How to set an opt-out cookie in the “From Visited” scenario when
-browsers block third-party cookies with the new opt-out tool
-- Request
-- Response
-- Guidelines for using a Trust Cookie (session cookie)
-- Guidelines for response
+### Production & Staging Environments
 
-## I. CONSUMER OPT-OUT EXPERIENCE
+For testing purposes, companies may need to whitelist: 
+- [optout.aboutads.info](https://optout.aboutads.info) (production)
+- [dev.aboutads.info](https://dev.aboutads.info) (staging & onboarding)
 
-The purpose of the WebChoices opt-out tool is to provide consumers with a destination to:
+The staging environment is essentially a sandbox where companies can test their choice functionality without releasing it to the public.
 
-1.  Identify a list of companies who have committed to conducting
-    responsible advertising practices in alignment with the DAA’s
-    Principles;
+Links directing users to the WebChoices tool should point to [optout.aboutads.info](https://optout.aboutads.info).
 
-2.  Receive a detailed report of which companies engage in
-    Interest-Based Advertising on a consumer’s browser; and,
+### The Onboarding Process
 
-3.  Provide consumers the ability to opt out of collection and use of
-    data for Interest-Based Advertising from one, several, or all of the
-    companies listed on the WebChoices tool.
+This section provides information on how companies can onboard their organization's information and endpoints to the WebChoices platform.
 
-## II. WEBCHOICES DEVELOPMENT AND PRODUCTION SITES
+- **Step 1 - Identify Your Onboarding Contact:**
+Each company looking to be listed on WebChoices will receive a communication from the DAA on how to integrate. Please ensure that your designated point of contact ("POC") has the necessary rights to begin the onboarding process. While many companies use technical staff for this process, it is not required.
 
-This section provides instructions on how a company can access the
-WebChoices development site to test integrations before deploying them
-to consumers.
+- **Step 2 - Respond Promptly:**
+Your organization's POC will receive an email from the DAA to the email address you have provided. To update your contact email, please inform DAA staff directly. Please respond to our requests in a timely manner.
+  
+- **Step 3 - Provide the DAA with Set-Up Information:** Provide the DAA with the following:
+    - A URL to your organization's website;
+    - A URL to your organization's privacy policy or privacy notice;
+    - A brief description of your company (this will appear inside WebChoices);
+    - Ensure your logo is up-to-date on [logo.dev](https://www.logo.dev/). From that resource, a logo for your company  will appear inside WebChoices;
+    - A designation of whether you can read the AdChoices Signal in the Protect My Choices extension, and how (header or reader - more information further in this documentation);
+    - Ensure there are no rules in place that restrict location for accepting endpoint interactions; no geo-blocking of countries (e.g., Canada, Argentina, etc). The DAA shares this tool with various jurisdictions, and choice requests may be set from these and other countries; and,
+    - The (non-unique) name and value of your opt-out cookie.
 
-**Access**. WebChoices is accessible at the following URLs:
-- Staging & Onboarding: <https://dev.aboutads.info>
-- Production: <https://optout.aboutads.info/>
+- **Step 4 - Your Endpoint(s) are Added to Staging:** After providing the necessary information, we will add your endpoint(s) to the WebChoices staging site [dev.aboutads.info](https://dev.aboutads.info), where you and the DAA can then test and review your integration. DAA staff will notify you of approval or with requests to repair any errors, if discovered.
 
-**Credentials**. The staging environment is essentially a sandbox
-    where companies’ opt-out functionality can be tested without being
-    released to the public.
+- **Step 5 - Move to Production:** After testing is completed, you will receive a confirmation email indicating that your endpoint(s) have been approved and activated. DAA staff will then migrate the change to the production environment, and your endpoint will be available to consumers on [optout.aboutads.info](https://optout.aboutads.info).
 
-## III. ONBOARDING PROCESS
+## Cookie-Based Integrations
 
-This section provides information on how companies can onboard their
-organization’s information and endpoints to the WebChoices opt-out
-platform.
+**1. Browser Compatibility:** No technologies shall be utilized in your implementation of an endpoint that will render it unable to function reliably and quickly on all major browsers and operating system combinations on desktop and mobile devices that support third-party cookies.
 
-- **Step 1 - Email Contact**: Each company currently listed on the
-    current choice page will receive an email invitation to start the
-    onboarding process. Please ensure that your designated point of
-    contact (“POC”) is aware of this email and has the necessary rights
-    to start the onboarding process. While many companies use technical
-    staff for this process, it is not required.
+**2. Opt-Out Cookies:**
+- Companies shall use generic values for their company's opt-out cookie value.
+- Opt-out cookies that are generated by a company endpoint shall have a minimum lifespan of 5 years and shall be renewed for at least another 5 years upon each subsequent opt-out request received. When calculating the 5-year lifespan, add two extra days to account for leap years.
+- Cookies not required to opt out a user shall never be set by a company's WebChoices endpoint. Any cookies that are necessary for a company's endpoints to function (e.g., tokens) shall not persist beyond the current browser session.  
+- Any use of technology (including cookies) may still be permissible so long as the data cannot be collected or used for IBA after an opt-out choice. Violating this requirement may result in a breach of the terms under which this tool is offered to companies.
+- Companies may not exploit the trusted relationship established via the WebChoices tool. But companies may leverage their existing first-party relationships or non-cookie technology for non-IBA purposes after opt-out.
+- Some companies may have multiple opt-out endpoints, each with a different opt-out cookie value. Please contact DAA staff if you have multiple opt-out cookies with different values.
+- Upon a successful opt-out through WebChoices, all cookies related to IBA activities shall expire, except those necessary to maintain the opt-out status of the consumer.
+- Non-cookie-based IBA technologies, such as IBA made possible probabilistically, must honor the presence of an opt-out cookie being set, regardless of the non-cookie technology used.
 
-- **Step 2 - Respond to Email**: Your organization’s POC will receive
-    an email from DAA to the email address you have provided. To update
-    your contact email, please inform DAA staff directly.
+**3. Use of Optional Anti-CSRF Tokens:**
+- Companies are allowed (but not required) to exchange anti-CSRF tokens in advance of setting an opt-out cookie as part of this specification for a consumer opt-out process.
+- Companies seeking the additional transactions that allow the anti-CSRF token exchange may be asked to meet elevated performance SLA's (such as endpoint response times) for their endpoints to ensure that the company's additional transactions do not negatively impact usability for consumers.
+- If a request to an endpoint fails due to anti-CSRF token validation, the endpoint is required to return the appropriate error code back to the requestor and at no point shall it return rendered content or XML that is visible within a consumer's browser window.
 
-- **Step 3**: Provide DAA with the following:
+**4. Opt Out Failure:**
+- All failures/errors must return a result back for processing, regardless of the reason. Any failure to do so may result in your endpoint being deactivated to preserve a fast, accurate, and predictable consumer experience. Companies will use reasonable efforts to cure issues raised by the DAA. Failure to address the problem within a reasonable time may, at the DAA's discretion, result in a company's delisting.
 
-    - A URL to your organization’s website;
-    - A URL to your organization’s privacy policy or privacy notice;
-    - A brief description of your company (this will appear on the opt-out page);
-    - A logo of your company (this will appear on the opt-out page);
-    - A designation of whether you use cookie technologies for IBA;
-    - A designation of whether you use non-cookie technologies for IBA;
-    - A designation of whether you are able to read the AdChoices Signal in the Protect My Choices extension.;
-    - The (non-unique) value of your opt-out cookie; and,
-    - The URL where your Advertising ID rotation functionality exists.
-        Companies who elect to extend consumer opt outs to both IBA
-        **and** non-cookie technology Reporting activities are not
-        required to provide a rotation mechanism.
+**5. Recommendations:**
+- Use some variation of "opt-out" as the name of your company's opt-out cookie. This helps consumers identify which cookies are opt-out cookies.
+- Use request referrers to limit access to a company's endpoint, but each one must permit requests from allowable subdomains, including [dev.aboutads.info](https://dev.aboutads.info) and [optout.aboutads.info](https://optout.aboutads.info). Overly restrictive referrer validation logic within a company's endpoint can interfere with critical quality assurance processes when onboarding new companies or when releasing new features to the opt-out tool.
 
-- **Step 6**: After providing the necessary information, we will add
-    your endpoint to the WebChoices onboarding site dev.aboutads.info
-    where you and DAA can then test and review your endpoint. DAA staff
-    will notify you of approval or with requests to repair any errors,
-    if discovered.
+**5. Performance:**
+- Maintaining fast endpoints is essential. Company endpoints should respond quickly (e.g., ideally in milliseconds) to ensure a fast opt-out experience for users. If endpoints are not quick enough, they may timeout and fail for the user.
+- The recommended approach for companies that are not using non-cookie technologies is to use HTTP 302 redirects whenever possible. Endpoints that use JavaScript for browser redirection must focus particularly on browser compatibility and rapid response times. Each company endpoint has a limited time to deliver a response, and JavaScript (or chained redirects) can add undesirable processing time and possibly cause a failure to be reported to the consumer if the endpoint exceeds a reasonable allowable transaction response time.
 
-- **Step 7**: After DAA review of your submission, you will receive a
-    confirmation email indicating that your endpoint has been approved
-    and activated. DAA staff will then migrate the change to the
-    production environment and your endpoint will be available to
-    consumers.
 
-## IV. CONSUMER OPT-OUT INTEGRATION SPECIFICATION
-
-This section describes what is required to implement a WebChoices
-Opt-Out Service Endpoint capable of integrating with the cookie-based
-WebChoices consumer opt-out tool.
-
-### A. General Requirements
-
-#### 1. Browser Compatibility
-
-- No technologies shall be utilized in your implementation of an
-    endpoint that will render it unable to function reliably and quickly
-    on all major browser and operating system combinations on desktop
-    and mobile devices which support third-party cookies.
-
-#### 2. Opt-Out Cookies
-
--  Companies shall use generic values for their company's opt-out
-    cookie value.
--  Opt-out cookies that are generated by a company endpoint shall have
-    a minimum lifespan of 5 years and shall be renewed for at least
-    another 5 years upon each subsequent opt-out request received. When
-    calculating the 5-year lifespan, account for a possible two extra
-    days to account for leap years.
-- Cookies not required to opt out a user shall never be set by a
-    company’s WebChoices endpoint. Any cookies that are necessary for a
-    company’s endpoints to function (e.g., tokens) shall not persist
-    past the current browser session.
-- The WebChoices tool may give companies an enhanced trust
-    relationship when “Action ID=5” is used to set a session cookie
-    prior to setting an IBA opt-out cookie. After setting this opt-out
-    cookie, the WebChoices tool is made available for companies to
-    reliably set opt-out choices in third-party cookie blocking
-    environments. Consistent with DAA Principles, any use of technology
-    (including cookies) may still be permissible so long as the data
-    cannot be collected or used for IBA after an opt-out choice. Violating 
-    this requirement may result in a breach of the terms under which this tool 
-    is offered to companies.
-- Companies may not exploit the trusted relationship established via
-    WebChoices tool. But companies may leverage their existing 1st party
-    relationships or non-cookie technology for non-IBA purposes after
-    opt out.
-- Some companies may have multiple endpoints, each with a different
-    opt-out cookie value. Please contact DAA staff if you have multiple
-    opt-out cookies with differing values.
-- Upon a successful opt out, all cookies related to IBA activities
-    shall be expired, except those necessary to maintain the opt-out
-    status of the consumer.
-- Non-cookie based IBA technologies, such as IBA made possible by a
-    statistical identifier (Stat ID) or HTML5 local storage, must honor
-    the presence of an opt-out cookie being set, regardless of
-    non-cookie technology used.
-
-#### 3. Use of Optional Anti-CSRF Tokens
-
-- Companies are allowed (but not required) to exchange anti-CSRF
-    tokens in advance of setting an opt-out cookie as part of this
-    specification for a consumer opt-out process.
-- Companies seeking the additional transactions that allow the
-    anti-CSRF token exchange may be asked to meet elevated performance
-    SLA's (such as endpoint response times) for their endpoints to
-    ensure that the company’s additional transactions do not negatively
-    impact usability for consumers.
-- If a request to an endpoint fails due to Anti-CSRF Token validation,
-    the endpoint is required to return the appropriate error code back
-    to the requestor and at no point shall it return rendered content or
-    xml that is visible within a consumer's browser window.
-
-#### 4. Opt Out Failures
-
-- As is the case with the current choice page, all failures/errors
-    must return a result back for processing, regardless of reason. Any
-    failure to do so may result in your endpoint being deactivated
-    automatically to preserve a fast, accurate and predictable consumer
-    experience. Companies will use reasonable efforts to cure issues
-    raised by DAA. Failure to address issue within a reasonable may
-    result in, at the discretion of DAA, delisting a company.
-
-#### 5. Recommendations
-
-- Use some variation of ‘opt-out’ as the name of your company's
-    opt-out cookie. This helps consumers identify which cookies are
-    opt-out cookies.
-- Use Request Referrers to limit access to a company’s endpoint, but
-    each one must permit requests from allowable subdomains including
-    dev, www and optout. Overly restrictive
-    referrer validation logic within a company’s endpoint can interfere
-    with critical quality assurance processes when onboarding new
-    companies or when releasing new features to the opt-out tool.
-
-#### 6. Performance
-
-- Maintaining fast endpoints is becoming increasingly important with
-    the implementation of additional technologies. There will be
-    increased focus to ensure company endpoints are responding quickly
-    to ensure a fast opt-out experience for users.
-- The recommended approach for those companies that are not using
-    non-cookie technologies is to use a HTTP 302 redirects whenever
-    possible. Endpoints that make use of JavaScript for browser
-    redirection must particularly focus on browser compatibility and
-    rapid response times. Each company endpoint has a limited amount of
-    time to deliver a response and JavaScript (or chained redirects) can
-    add undesirable processing time and possibly even result in a
-    failure being reported to the consumer due to a company’s endpoint
-    not meeting a reasonable allowable transaction response time.
-
-### B. Status (Legacy Specification) and Token
+### Status (Legacy Specification) and Token: (action_id=3)
 
 #### Request
 
 | **Attribute** | **Description / value** |
 |----|----|
-| Referer | https://\<dev \| www \| optout\>.aboutads.info/\* |
+| Referer | https://\<dev \| optout\>.aboutads.info/\* |
 | Accept | text/html,application/xhtml+xml |
 
 *<u>Sample Request URL:</u>*
@@ -242,21 +100,19 @@ WebChoices consumer opt-out tool.
 `http://your.domain/with/path/to/endpoint`
 `?action_id=3`
 `&participant_id=10`
-`&rd=http%3A%2F%2Fwww.aboutads.info`
+`&rd=http%3A%2F%2Foptout.aboutads.info`
 `&nocache=223442`
 
 | **Field** | **Data Type** | **Description** |
 |----|:--:|----|
-| action_id | integer | Value “3” indicates a status request and token if applicable |
-| participant_id | string | Participant Identifier for the Opt-out tool to correlate your endpoint with operations. Value is subject to change without notice. |
+| action_id | integer | Value "3" indicates a status request and token, if applicable |
+| participant_id | string | Participant identifier for WebChoices to correlate your endpoint with operations. Value is subject to change without notice. |
 | rd | string | hostname and protocol |
 | nocache | string | Ignore: cache buster |
 
 #### Response (Legacy Specification)
 
-This is the existing specification and can be used by companies that
-are utilizing ONLY cookie identifiers for IBA (i.e. companies NOT
-employing non-cookie tech).
+This is the existing specification and can be used by companies that use ONLY cookie identifiers for IBA (i.e. companies NOT employing non-cookie technologies).
 
 <table>
 <colgroup>
@@ -285,15 +141,14 @@ employing non-cookie tech).
 <tr>
 <td>status</td>
 <td style="text-align: center;">integer</td>
-<td><p>1 = No IBA cookie(s) from Participant on the browser.</p>
-<p>2 = IBA cookie(s) from Participant present on the browser.</p>
-<p>3 = Opt-out cookie is present on the browser.</p></td>
+<td><p>1 = No IBA cookie(s) from participant on the browser</p>
+<p>2 = IBA cookie(s) from participant present on the browser</p>
+<p>3 = Opt-out cookie is present on the browser</p></td>
 </tr>
 <tr>
 <td>token</td>
 <td style="text-align: center;">string</td>
-<td>optional Anti-CSRF string, Must be valid ASCII characters allowed in
-a URL.</td>
+<td>Optional anti-CSRF string; must be valid ASCII characters allowed in a URL</td>
 </tr>
 </tbody>
 </table>
@@ -303,13 +158,11 @@ a URL.</td>
 \<**rd**\>/token/\<**participant_id**\>/\<**status**\>/\<**token**\>
 
 <u>Example:</u>
-`http://www.aboutads.info/token/123/1/magic_string`
+`http://optout.aboutads.info/token/123/1/magic_string`
 
 #### Response (New Specification)
 
-This response is required for participants. Companies utilizing
-non-cookie technologies <u>are required</u> to provide accurate
-status as specified below.
+This response is required for participants. Companies utilizing non-cookie technologies <u>are required</u> to provide accurate status as specified below.
 
 <table>
 <colgroup>
@@ -338,27 +191,23 @@ status as specified below.
 <tr>
 <td>cookie-status</td>
 <td style="text-align: center;">integer</td>
-<td><p>0 = Not Applicable - Cookie Technologies are not in use</p>
-<p>1 = No IBA cookie(s) from Participant on the browser</p>
-<p>2 = IBA cookie(s) from Participant present on the browser.</p>
-<p>3 = Opt-out cookie is present on the browser.</p></td>
+<td><p>0 = Not Applicable - Cookie technologies are not in use</p>
+<p>1 = No IBA cookie(s) from participant on the browser</p>
+<p>2 = IBA cookie(s) from participant present on the browser</p>
+<p>3 = Opt-out cookie is present on the browser</p></td>
 </tr>
 <tr>
 <td>other-status</td>
 <td style="text-align: center;">integer</td>
-<td><p>0 = Not Applicable - Non-Cookie Technologies are not in use</p>
-<p>1 = No Non-Cookie IBA Identifier from Participant present for the
-browser</p>
-<p>2 = Non-Cookie IBA Identifier from Participant present for the
-browser.</p>
-<p>3 = Non-Cookie Opt-out from Participant present for the
-browser.</p></td>
+<td><p>0 = Not Applicable - Non-cookie technologies are not in use</p>
+<p>1 = No non-cookie IBA identifier from participant present for the browser</p>
+<p>2 = Non-cookie IBA identifier from participant present for the browser</p>
+<p>3 = Non-cookie opt-out from participant present for the browser</p></td>
 </tr>
 <tr>
 <td>token</td>
 <td style="text-align: center;">string</td>
-<td>optional Anti-CSRF string, Must be valid ASCII characters allowed in
-a URL.</td>
+<td>Optional anti-CSRF string; must be valid ASCII characters allowed in a URL</td>
 </tr>
 </tbody>
 </table>
@@ -367,25 +216,17 @@ a URL.</td>
 
 \<rd\>/token/\<participant_id\>/**\<cookie-status\>-\<other-status\>**/\<token\>
 
-Example for company using non-cookie technology:
-`http://www.aboutads.info/token/123/1-1/csrftoken`
+Example for a company using non-cookie technology:
+`http://optout.aboutads.info/token/123/1-1/csrftoken`
 
-Example for company using only cookie technology:
-`http://www.aboutads.info/token/123/1-0/csrftoken`
+Example for a company using only cookie technology:
+`http://optout.aboutads.info/token/123/1-0/csrftoken`
 
-### C. Opt Out
+### Opt Out: (action_id=4)
 
-Opt out a consumer from the collection and use of data for IBA by
-setting an “opt-out” cookie on the consumer’s browser. **This action
-reports success or failure and must be based on the actual presence of
-the opt-out cookie in the consumer’s browser**. Verification of the
-presence of the “opt-out” cookie is usually accomplished by
-redirecting to a verification page or script before redirecting the
-result signal back to the WebChoices tool. If utilizing server-side
-non-cookie technologies (e.g., statistical identifiers), the opt out
-must also be persisted on the company’s server.
+Opt out a consumer from the collection and use of data for IBA by setting an "opt-out" cookie on the consumer's browser. **This action reports success or failure and must be based on the actual presence of the opt-out cookie in the consumer's browser**. Verification of the presence of the "opt-out" cookie is usually accomplished by redirecting to a verification page or script before redirecting the result signal back to the WebChoices tool. If using server-side non-cookie technologies (e.g., statistical identifiers), the opt-out must also be persisted on the company's server.
 
-### Request
+#### Request
 
 <table>
 <colgroup>
@@ -403,7 +244,7 @@ must also be persisted on the company’s server.
 <tbody>
 <tr>
 <td style="text-align: center;">Referer</td>
-<td>https://&lt;dev | www | optout&gt;.aboutads.info/*</td>
+<td>https://&lt;dev | optout&gt;.aboutads.info/*</td>
 </tr>
 <tr>
 <td style="text-align: center;">Accept</td>
@@ -416,22 +257,20 @@ must also be persisted on the company’s server.
 
 `http://your.domain/endpoint`
 `?action_id=4&participant_id=10`
-`&rd=http://www.aboutads.info`
+`&rd=http://optout.aboutads.info`
 `&token=magic_value&nocache=223442`
 
 | **Field** | **Data Type** | **Description** |
 |----|:--:|----|
-| action_id | integer | Value “4” indicates an opt out request |
-| participant_id | string | Participant Identifier for the Opt-out tool to correlate your endpoint with operations. Value is subject to change without notice. |
+| action_id | integer | Value "4" indicates an opt-out request |
+| participant_id | string | Participant identifier for the WebChoices tool to correlate your endpoint with operations. Value is subject to change without notice. |
 | rd | string | hostname and protocol |
-| token | string | optional Anti-CSRF string if returned during the status check |
+| token | string | Optional anti-CSRF string if returned during the status check |
 | nocache | string | Ignore: cache buster |
 
-### Response (Legacy Specification)
+#### Response (Legacy Specification)
 
-This is the existing specification and can continue to be used by
-companies that are utilizing only cookie-based identifiers for IBA
-purposes.
+This is the existing specification and can continue to be used by companies that are utilizing only cookie-based identifiers for IBA purposes.
 
 <table>
 <colgroup>
@@ -465,17 +304,14 @@ purposes.
 <tr>
 <td>result_id</td>
 <td style="text-align: center;">integer</td>
-<td><p>1 = <strong>Success:</strong> after an opt out attempt, the opt
-out cookie is present on the user’s browser</p>
-<p>2 = <strong>Failure:</strong> after an opt out attempt, the cookie is
-not present on the user’s browser</p>
-<p>3 = <strong>Failure:</strong> anti-CSRF token mismatch [4..] =
-Reserved for future use</p></td>
+<td><p>1 = <strong>Success</strong>: after an opt-out attempt, the opt-out cookie is present on the user's browser</p>
+<p>2 = <strong>Failure</strong>: after an opt-out attempt, the cookie is not present on the user's browser</p>
+<p>3 = <strong>Failure</strong>: anti-CSRF token mismatch [4..] = Reserved for future use</p></td>
 </tr>
 <tr>
 <td>message</td>
 <td style="text-align: center;">string</td>
-<td>optional simple ascii text string fully URL compliant.</td>
+<td>Optional simple ASCII text string fully URL compliant</td>
 </tr>
 </tbody>
 </table>
@@ -485,13 +321,11 @@ Reserved for future use</p></td>
 \<**rd**\>/finish/\<**participant_id**\>/\<**action_id**\>/\<**result_id**\>/\<**message**\>
 
 <u>Example:</u>
-`http://www.aboutads.info/finish/123/4/1/simple_string`
+`http://optout.aboutads.info/finish/123/4/1/simple_string`
 
-### Response (New Specification)
+#### Response (New Specification)
 
-This response is required is for participants. Companies utilizing
-non-cookie technologies are required to provide accurate opt-out
-result as specified below.
+This response is required for participants. Companies that use non-cookie technologies are required to provide an accurate opt-out result as specified below.
 
 <table>
 <colgroup>
@@ -525,31 +359,23 @@ result as specified below.
 <tr>
 <td>cookie-result</td>
 <td style="text-align: center;">integer</td>
-<td><p>0 = <strong>Not Applicable</strong> - Cookie technologies are not
-in use</p>
-<p>1 = <strong>Success:</strong> after an opt out attempt, the opt out
-cookie is present on the user’s browser</p>
-<p>2 = <strong>Failure:</strong> after an opt out attempt, the cookie is
-not present on the user’s browser</p>
-<p>3 = <strong>Failure:</strong> anti-CSRF token mismatch [4..] =
-Reserved for future use</p></td>
+<td><p>0 = <strong>Not Applicable</strong>: Cookie technologies are not in use</p>
+<p>1 = <strong>Success</strong>: after an opt-out attempt, the opt-out cookie is present on the user's browser</p>
+<p>2 = <strong>Failure</strong>: after an opt-out attempt, the cookie is not present on the user's browser</p>
+<p>3 = <strong>Failure</strong>: anti-CSRF token mismatch [4..] = Reserved for future use</p></td>
 </tr>
 <tr>
 <td>other-result</td>
 <td style="text-align: center;">integer</td>
-<td><p>0 = <strong>Not Applicable</strong> - Non-Cookie technologies are
-not in use</p>
-<p>1 = <strong>Opt Out Success</strong>: Non Cookie Identifier for the
-browser has been received by the Participants server</p>
-<p>2 = <strong>Opt Out Failure</strong>: Non Cookie Identifier for the
-browser was not received by the Participants server</p>
-<p>3 = <strong>Failure:</strong> anti-CSRF token mismatch [4..] =
-Reserved for future use</p></td>
+<td><p>0 = <strong>Not Applicable</strong>: Non-cookie technologies are not in use</p>
+<p>1 = <strong>Opt Out Success</strong>: Non-cookie identifier for the browser has been received by the participant's server</p>
+<p>2 = <strong>Opt Out Failure</strong>: Non-cookie identifier for the browser was not received by the participant's server</p>
+<p>3 = <strong>Failure</strong>: Anti-CSRF token mismatch [4..] = Reserved for future use</p></td>
 </tr>
 <tr>
 <td>message</td>
 <td style="text-align: center;">string</td>
-<td>optional simple ascii text string fully URL compliant.</td>
+<td>Optional simple ASCII text string fully URL compliant</td>
 </tr>
 </tbody>
 </table>
@@ -559,103 +385,63 @@ Reserved for future use</p></td>
 \<rd\>/finish/\<participant_id\>/\<action_id\>/\<cookie-result\>-\<other-result\>/\<message\>
 
 <u>Example:</u>
-`http://www.aboutads.info/token/123/1-1/magic_string`
+`http://optout.aboutads.info/token/123/1-1/magic_string`
 
+### Guidelines for Response
 
-## V. ESTABLISHING A FIRST PARTY TRUST RELATIONSHIP
+1.  The company's response shall be a single HTTP 200 response.
 
-This is a new feature available for all companies, regardless if they
-utilize cookies exclusively or also use non-cookie technologies for
-IBA. It is especially designed as a way to reliably set choice for
-non-cookie tech in third-party cookie-blocking environments, but all
-companies may use it to future-proof their choice systems or for other
-reasons, consistent with DAA Principles.
+2.  Company shall set cookies using HTTP headers. **The use of JavaScript is prohibited.**
 
-In order to support browsers that restrict setting cookies in
-third-party contexts, it has become necessary to add a new action_id
-to the existing action_ids currently required from participant
-endpoints.
+3.  No output shall be displayed to the screen unless for debugging purposes. This shall occur on: [dev.aboutads.info](https://dev.aboutads.info) AND NOT [optout.aboutads.info](https://optout.aboutads.info).
 
-This new request, known as action_id=5, is only used when a browser is
-configured to reject third-party cookies, but allows setting
-third-party cookies from sites “previously visited”. There is no
-callback request or verification and it is the company’s
-responsibility to maintain a responsive endpoint.
+4.  The company's response time shall be below 250ms. Timeouts for this step are very low. To facilitate a positive user experience, it is vital to maintain adequate response times across all company endpoints to ensure timely opt-out delivery to consumers' browsers.
 
-The purpose of this request is to set a session cookie so that a
-temporary trust relationship is created with the browser. Any cookies
-set during this process will be established in a first party context
-with your domain. This will allow the subsequent opt-out request
-(action_id=4) to set an opt-out cookie in a third-party context.
+### Protect My Choices Browser Extension
 
-If the browser does not already have a first-party cookie set from the
-company’s domain, this will create a trust relationship with the
-browser that may not have been otherwise possible. If an enhanced
-trust relationship is created as a part of this process, you may need
-to indicate this in the cookie value. This will allow you to prevent
-your systems from setting any additional cookies (such as frequency
-capping, ad delivery & reporting) once an opt-out is set on browsers
-where an enhanced trust relationship exists.
+Once the opt-out process is complete, consumers will be prompted to install the DAA's Protect My Choices browser extension. In some browsers (for example, Safari), this prompt appears before the opt-out flow begins.
 
-### Request
+Protect My Choices ("PMC") stores the consumer's choices locally using the AdChoices Signal. In browsers that support third-party cookies, these AdChoices Signal choices mirror the consumer's cookie-based choices in WebChoices. In those same browsers only, the extension can also re-create opt-out cookies if the consumer deletes cookies. This cookie re-creation applies only to opt-out cookies for companies included in WebChoices, and the extension does not re-create any other cookies.
 
-Headers
+The AdChoices Signal is placed on the consumer's device via a short-term first-party cookie set by the DAA after the consumer completes their opt-out(s) in WebChoices. The PMC extension will read that short-term cookie and store the AdChoices Signal indefinitely or until the consumer makes different selections (such as removing the PMC extension).
 
-| **Attribute** | **Description / value** |
-|----|----|
-| Referer | https://\<dev \| www \| optout\>.aboutads.info/\* |
-| Accept | text/html,application/xhtml+xml |
+See our **AdChoices Signal** and **Protect My Choices** documentation for more information about these mechanisms.
 
-*<u>Sample Request URL:</u>*
+## AdChoices Signal-Based Integrations
 
-`http://your.domain/endpoint?action_id=5&nocache=223442`
+Even if your company mainly uses third-party cookies for ad targeting today, it's still a good idea to implement the AdChoices Signal now. It helps future-proof your implementation by carrying consumer choice signals across newer targeting approaches (hashed email, phone-based identifiers, IP-based signals, probabilistic methods, etc.), including in browsers where third-party cookies are limited or unavailable.
 
-URL Parameters
+For browsers that do not support third-party cookies, consumers can still use WebChoices to make IBA choice requests. In these environments, choice requests are stored in the Protect My Choices extension using the AdChoices Signal specification. Companies can access these choice requests either by using a reader or by interrogating request headers.
 
-| **Field** | **Data Type** | **Description** |
-|----|:--:|----|
-| action_id | string | value “5” indicates establish temporary trust by setting a session cookie. |
-| nocache | string | Ignore: cache buster |
+The DAA will list a company in the non-third-party-cookie version of WebChoices only after validating that the company has deployed one of the supported methods to access choice requests (reader, header-based approach, or another approved method).
 
-### Response
+**Note:** In non-third-party-cookie environments, the PMC browser extension stores the AdChoices Signal only and does not regenerate or "harden" opt-out cookies. 
 
-1.  All cookies shall be set using HTTP headers. There is no redirect
-    required as part of this request. **The use of JavaScript in this
-    step is prohibited.**
+### <ins>Option 1</ins>: JavaScript Reader
 
-### Guidelines For using a Trust Cookie (session cookie)
+Use a "reader" component to retrieve AdChoices Signal choice requests from the PMC environment and apply them to your ad delivery and/or measurement flows.
 
-1.  The cookie for this step shall be a **session cookie with no
-    expiration set.**
+What this typically means:
+- Implement the approved AdChoices Signal reader (JS reader[^2]) in the parts of your stack that decide whether to serve interest-based ads.
+- On each relevant decision point (ad request, bid request, personalization decision), read the consumer's current choice state.
+- Ensure the choice state is respected consistently.
 
-2.  This cookie shall be separate from the opt-out cookie, IBA cookies,
-    and Reporting cookies.
+### <ins>Option 2</ins>: HTTP Header Inspection
 
-3.  The cookie name and value shall be generic (non-unique). The best
-    practice for this step shall be to use cookie name=“FPtrust” and
-    cookie value=“1”
+Instead of using a dedicated reader, you can access AdChoices Signal choices by inspecting headers on incoming requests (for example, when your infrastructure receives ad calls, bid requests, or tag calls).
 
-### Guidelines for response
+What this typically means:
+- Your edge/server inspects incoming HTTP requests for the AdChoices Signal header(s).
+- If present, your systems interpret the header values to determine whether IBA is permitted for that user/session/context.
+- You propagate the interpreted choice to downstream systems (decisioning, bidding, measurement) in a controlled and auditable way.
 
-1.  A company’s response shall be a single HTTP 200 response.
+### <ins>Option 3</ins>: Other Approved Methods
 
-2.  Company shall set cookies using HTTP headers. **The use of
-    JavaScript is prohibited.**
-
-3.  No output shall be displayed to the screen unless for debugging
-    purposes. This shall occur on: dev.aboutads.info AND NOT
-    optout.aboutads.info
-
-4.  Company’s response time shall be below 250ms. Timeouts for this step
-    are very low. To facilitate a positive user experience, it is
-    important that an adequate response time be maintained on all
-    company endpoints to ensure timely opt-out delivery to consumers’
-    browsers.
+If your stack uses a specialized integration path (for example, a wrapper/module approach such as a Prebid module), coordinate validation with the DAA.
 
 
 
-[^1]: Cookie-less technologies in this WebChoices document do
-NOT include IDFA, AAID, hashed emails and phone numbers. DAA offers
-different tools: AppChoices, for consumers to set preferences in the
-in-app environment and YAC Token Tool for consumers to set preferences
-for hashed identifiers.
+[^1]: Companies can also install the extension to verify their ability to read and decode the AdChoices Signal stored by the extension.
+[^2]: Ask the DAA for a code snippet.
+[^3]: The new WebChoices platform is fully backwards compatible with the DAA's old choice page.
+
