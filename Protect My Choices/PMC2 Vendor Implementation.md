@@ -2,7 +2,7 @@
 
 ## Background
 
-When consumers install the Protect My Choices (v2.0) extension – which is currently available for the desktop versions of Google Chrome and Mozilla Firefox and the desktop and mobile versions of Apple Safari – any preferences expressed through the WebChoices tool will be stored as a string in the extension, according to the AdChoices Signal specification document. The value of this string can be read by any participant with the code on page.
+When consumers install the Protect My Choices (v2.0) extension – which is currently available for the desktop versions of Google Chrome and Mozilla Firefox and the desktop and mobile versions of Apple Safari – any preferences expressed through the WebChoices tool will be stored as a string in the extension, according to the AdChoices Signal specification document. The value of this string can be read by any participating company with the code on page.
 
 ## Accessing User Preferences | JavaScript "Reader"
 
