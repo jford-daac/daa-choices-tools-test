@@ -182,6 +182,6 @@ The strings are identical except for the added zeros at the end. If not accounte
 
 [^1]: Those who integrate into the AdChoices tools can receive the string along with an identifier via API for any backend (asynchronous) preference or suppression operations.
 
-[^2]:  We have [sample code available](https://github.com/rvidakovic/daa-choices-tools-test/tree/main/Protect%20My%20Choices/Code) for reading and decoding the AdChoices Signal in a browser header.
+[^2]:  We have [sample code available](Code) for reading and decoding the AdChoices Signal in a browser header.
 
 [^3]:  The spec requires a base64url string. Padding characters (‘=’) must not be used. See [RFC 4648 sec 5](https://datatracker.ietf.org/doc/html/rfc4648#section-5).
