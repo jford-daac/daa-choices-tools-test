@@ -64,3 +64,4 @@ The extension includes legacy cookie-hardening functionality for Chrome, which r
 ## Resources
 
 - [Chrome Web Store](https://chromewebstore.google.com/detail/protect-my-choices/hdgloanjhdcenjgiafkpbehddcnonlic)
+- [Apple Store](http://apps.apple.com/us/app/protect-my-choices/id6475873704)
