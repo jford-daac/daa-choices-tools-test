@@ -161,7 +161,7 @@ The same applies in the case of a preference with a token-based identifier, for 
 
 ### Browser Extension: Protect My Choices 
 
-When consumers install the Protect My Choices (v2.0) extension, any preferences expressed through the YourAdChoices tools will be stored as a string in the extension, according to this AdChoices Signal specification document. The value of the string can be read by any participant with the code on page, either via JavaScript or by looking for specific HTTP headers set by the extension (see Appendix 8 for illustration). For more details on how to access the AdChoices Signal in cases where consumers have the Protect My Choices extension installed, refer to the [PMC technical specifications documentation](https://digitaladvertisingalliance.org/DAA_style/ADS/PMC_V2_Tech_Spec.pdf).
+When consumers install the Protect My Choices (v2.0) extension, any preferences expressed through the YourAdChoices tools will be stored as a string in the extension, according to this AdChoices Signal specification document. The value of the string can be read by any participant with the code on page, either via JavaScript or by looking for specific HTTP headers set by the extension (see Appendix 8 for illustration). For more details on how to access the AdChoices Signal in cases where consumers have the Protect My Choices extension installed, refer to the [PMC technical specifications documentation](../Protect%20My%20Choices/PMC2%20Vendor%20Implementation.md).
 
 ### Passing Between Participating Companies
 
