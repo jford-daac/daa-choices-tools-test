@@ -1,10 +1,10 @@
-# Protect My Choices v2.0 (Beta): How to read the AdChoices Signal 
+# Protect My Choices v2.0 (Beta) Vendor Implementation: How to Read the AdChoices Signal 
 
 ## Background
 
-When consumers install the Protect My Choices (v2.0) extension – which is currently available for the desktop versions of Google Chrome and Mozilla Firefox and the desktop and mobile versions of Apple Safari – any preferences expressed through the WebChoices tool will be stored as a string in the extension, according to the AdChoices Signal specification document. The value of this string can be read by any participant with the code on page.
+When consumers install the Protect My Choices (v2.0) extension – which is currently available for the desktop versions of Google Chrome and Mozilla Firefox and the desktop and mobile versions of Apple Safari – any preferences expressed through the WebChoices tool will be stored as a string in the extension, according to the AdChoices Signal specification document. The value of this string can be read by any participating company with the code on page.
 
-## Accessing User Preferences | JavaScript ‘Reader’
+## Accessing User Preferences | JavaScript "Reader"
 
 Web participants can access these user preferences from the extension, as required and when available, in real time. Vendors who serve ads or collect data about users, such as ad servers, exchanges, DSPs, DMPs, CDPs, etc., will need to listen for the “**ExtensionLoaded**” event name on the top application level. This sample JS code confirms that the extension was loaded:
 

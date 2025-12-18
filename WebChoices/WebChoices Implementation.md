@@ -97,10 +97,10 @@ Your organization's POC will receive an email from the DAA to the email address 
 
 *<u>Sample Request URL:</u>*
 
-`http://your.domain/with/path/to/endpoint`
+`https://your.domain/with/path/to/endpoint`
 `?action_id=3`
 `&participant_id=10`
-`&rd=http%3A%2F%2Foptout.aboutads.info`
+`&rd=https%3A%2F%2Foptout.aboutads.info`
 `&nocache=223442`
 
 | **Field** | **Data Type** | **Description** |
@@ -158,7 +158,7 @@ This is the existing specification and can be used by companies that use ONLY co
 \<**rd**\>/token/\<**participant_id**\>/\<**status**\>/\<**token**\>
 
 <u>Example:</u>
-`http://optout.aboutads.info/token/123/1/magic_string`
+`https://optout.aboutads.info/token/123/1/magic_string`
 
 #### Response (New Specification)
 
@@ -217,10 +217,10 @@ This response is required for participants. Companies utilizing non-cookie techn
 \<rd\>/token/\<participant_id\>/**\<cookie-status\>-\<other-status\>**/\<token\>
 
 Example for a company using non-cookie technology:
-`http://optout.aboutads.info/token/123/1-1/csrftoken`
+`https://optout.aboutads.info/token/123/1-1/csrftoken`
 
 Example for a company using only cookie technology:
-`http://optout.aboutads.info/token/123/1-0/csrftoken`
+`https://optout.aboutads.info/token/123/1-0/csrftoken`
 
 ### Opt Out: (action_id=4)
 
@@ -255,9 +255,9 @@ Opt out a consumer from the collection and use of data for IBA by setting an "op
 
 *<u>Sample Request URL:</u>*
 
-`http://your.domain/endpoint`
+`https://your.domain/endpoint`
 `?action_id=4&participant_id=10`
-`&rd=http://optout.aboutads.info`
+`&rd=https://optout.aboutads.info`
 `&token=magic_value&nocache=223442`
 
 | **Field** | **Data Type** | **Description** |
@@ -321,7 +321,7 @@ This is the existing specification and can continue to be used by companies that
 \<**rd**\>/finish/\<**participant_id**\>/\<**action_id**\>/\<**result_id**\>/\<**message**\>
 
 <u>Example:</u>
-`http://optout.aboutads.info/finish/123/4/1/simple_string`
+`https://optout.aboutads.info/finish/123/4/1/simple_string`
 
 #### Response (New Specification)
 
@@ -385,7 +385,7 @@ This response is required for participants. Companies that use non-cookie techno
 \<rd\>/finish/\<participant_id\>/\<action_id\>/\<cookie-result\>-\<other-result\>/\<message\>
 
 <u>Example:</u>
-`http://optout.aboutads.info/token/123/1-1/magic_string`
+`https://optout.aboutads.info/token/123/1-1/magic_string`
 
 ### Guidelines for Response
 
