@@ -1,5 +1,6 @@
 # WebChoices Implementation Instructions
-The [WebChoices Implementation document](https://github.com/rvidakovic/daa-choices-tools-test/blob/main/WebChoices/WebChoices%20Implementation.md) provides instructions for DAA Participants to integrate with WebChoices, the DAA's centralized consumer opt-out platform. It focuses on enabling the transparent and reliable setting of opt-out choices for IBA.
+The [WebChoices Implementation document](WebChoices%20Implementation.md) provides instructions for DAA participating companies to integrate with WebChoices, the DAA's centralized consumer opt-out platform. It focuses on enabling the transparent and reliable setting of opt-out choices for interest-based advertising (IBA).
+
 
 ## Key Concepts
 
