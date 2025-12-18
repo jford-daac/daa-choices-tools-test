@@ -442,6 +442,6 @@ If your stack uses a specialized integration path (for example, a wrapper/module
 
 
 [^1]: Companies can also install the extension to verify their ability to read and decode the AdChoices Signal stored by the extension.
-[^2]: Ask the DAA for a code snippet.
+[^2]: We have [sample code available](../Protect%20My%20Choices/Code/) for reading and decoding the AdChoices Signal in a browser header.
 [^3]: The new WebChoices platform is fully backwards compatible with the DAA's old choice page.
 
